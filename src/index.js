@@ -2,24 +2,23 @@
 const commander = require('commander');
 
 // 内部模块
-const { existsSync } = require('fs');
-const { resolve } = require('path');
-const { version } = require('../package.json');
+const {existsSync} = require('fs');
+const {resolve} = require('path');
+const {version} = require('../package.json');
 
 require('colors');
 
-commander.version(version)
-  .parse(process.argv);
+commander.version(version).parse(process.argv);
 
 const [todo = ''] = commander.args;
 
 if (existsSync(resolve(__dirname, `command/${todo}.js`))) {
-  require(`./command/${todo}.js`);
+    require(`./command/${todo}.js`);
 } else {
-  console.log(
+    console.log(
     `
       你输入了未知指令, 未能识别...
     `.red,
-  );
-  process.exit(-1);
+    );
+    process.exit(-1);
 }
